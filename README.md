@@ -23,8 +23,9 @@ a regular basis.
 - If no options are provided, it determines the list of current jails and backup them live in .gz format via ZFS snapshot
 - If on UFS filesystem, it will warn you that jails can be only safely backup (start/stop)
 - By default it removes backup files that are older than 2 days in /usr/local/bastille/backups/
-- If specified with flags (i.e. "quimby safe 4") it can optinally safely stop/start jails (for UFS filesystems) and remove
+- If specified with flags, it can optinally safely stop/start jails (for UFS filesystems) and remove
   backup files according to the retention period provided in number of days
+- Logs activity in /var/log/quimby.log
 
 ## TODO:
 - Backup running jails only
@@ -32,38 +33,36 @@ a regular basis.
 
 ## Installation
 
-#### Git
+#### Git on FreeBSD
 ```shell
 git clone https://github.com/tofazzz/quimby.git
 cd quimby
-- on FreeBSD:
 go build -o quimby
+mv quimby /usr/local/bin/
+```
 
-- on other OS:
+#### Git on other platforms
+```shell
+git clone https://github.com/tofazzz/quimby.git
+cd quimby
 env GOOS=freebsd GOARCH=amd64 go build -o quimby
+mv quimby /usr/local/bin/
+```
 
-Then move the executable where needed and setup crontab for execution:
-
+#### Crontab (every day at 1am)
+```shell
 0 1 * * * /usr/local/bin/quimby
 ```
 
 ## Sample Usages
 
-```shell
-quimby < safe | live > < days >
+- quimby
+- quimby safe 4
+- quimby live 9
 
-Options:
+## CMD options:
 
-none: hot backup jails and remove backups older than 2 days
-safe: it safely stop jails before backing them up. Required if using UFS filesystem
-live: hot backup jails without stopping them
-days: number of days of data retention
-
-Examples:
-
-root@server#quimby safe 9 - safely backup jails and remove backup files older than 9 days
-root@server#quimby live 0 - hot backup jails and remove all backup files
-
-
-Logs are stored under /var/log/quimby.log
-```
+**none**: hot backup jails and remove backups older than 2 days.
+**safe**: it safely stop jails before backing them up. Required if using UFS filesystem.
+**live**: hot backup jails without stopping them.
+**days**: number of days of data retention.
