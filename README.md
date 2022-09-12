@@ -1,32 +1,38 @@
-Quimby
-========
+# Quimby
+
 An open-source small tool written in GO for automating backups of FreeBSD jails managed with 
 [Bastille](https://bastillebsd.org/).
 
 (Quimby: a beginner surfer who is usually annoying)
 
-Dependencies: [FreeBSD](https://freebsd.org/), [BastilleBSD](https://bastillebsd.org/), ZFS filesystem for live backups.
+## Requirements
+
+- [FreeBSD](https://freebsd.org/)
+- [BastilleBSD](https://bastillebsd.org/)
+- ZFS filesystem for live backups.
+
+## Disclaimer
 
 I am a beginner programmer that wanted to automate the backup of all of my deployed jails on my servers.
 I use GO as I find it to be the best programming language for my use case and abilities. Please use this 
 tool as your own risk knowing that I probably will not have the time to work on this project full time on 
 a regular basis.
 
-Features
-============
+## Features
+
 - If no options are provided, it determines the list of current jails and backup them live in .gz format via ZFS snapshot
 - If on UFS filesystem, it will warn you that jails can be only safely backup (start/stop)
 - By default it removes backup files that are older than 2 days in /usr/local/bastille/backups/
 - If specified with flags (i.e. "quimby safe 4") it can optinally safely stop/start jails (for UFS filesystems) and remove
   backup files according to the retention period provided in number of days
 
-TODO:
+## TODO:
 - Backup running jails only
 - Do not start jails that were already stopped (current known bug)
 
-Installation
-============
-**Git**
+## Installation
+
+#### Git
 ```shell
 git clone https://github.com/tofazzz/quimby.git
 cd quimby
@@ -41,8 +47,8 @@ Then move the executable where needed and setup crontab for execution:
 0 1 * * * /usr/local/bin/quimby
 ```
 
-Usage
------------
+## Sample Usages
+
 ```shell
 quimby < safe | live > < days >
 
