@@ -62,7 +62,7 @@ mv quimby /usr/local/bin/
 
 ## CMD options:
 
-**none**: hot backup jails and remove backups older than 2 days.
-**safe**: it safely stop jails before backing them up. Required if using UFS filesystem.
-**live**: hot backup jails without stopping them.
-**days**: number of days of data retention.
+- **none**: hot backup jails and remove backups older than 2 days.
+- **safe**: it safely stop jails before backing them up. Required if using UFS filesystem.
+- **live**: hot backup jails without stopping them.
+- **days**: number of days of data retention.
