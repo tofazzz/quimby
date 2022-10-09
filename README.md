@@ -38,6 +38,7 @@ a regular basis.
 git clone https://github.com/tofazzz/quimby.git
 cd quimby
 go build -o quimby
+chmod +x quimby
 mv quimby /usr/local/bin/
 ```
 
@@ -46,6 +47,7 @@ mv quimby /usr/local/bin/
 git clone https://github.com/tofazzz/quimby.git
 cd quimby
 env GOOS=freebsd GOARCH=amd64 go build -o quimby
+chmod +x quimby
 mv quimby /usr/local/bin/
 ```
 
